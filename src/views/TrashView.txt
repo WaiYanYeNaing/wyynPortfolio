@@ -1,0 +1,232 @@
+<template>
+  <div>
+    <input type="file" @change="handleImageUpload" />
+    <canvas ref="canvas" style="display: none;"></canvas>
+    <img :src="watermarkedImageURL" alt="Watermarked Image" />
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      watermarkedImageURL: "",
+    };
+  },
+  methods: {
+    handleImageUpload(event) {
+      const file = event.target.files[0];
+            let formData = new FormData();
+            formData.append('file', file);
+      console.log(...formData)
+
+      if (file) {
+        this.addWatermarkToImage(file);
+      }
+    },
+    async addWatermarkToImage(file) {
+      const canvas = this.$refs.canvas;
+      const ctx = canvas.getContext("2d");
+
+      const image = new Image();
+      image.src = URL.createObjectURL(file);
+      await image.decode();
+
+      // Set canvas dimensions to match the image
+      canvas.width = image.width;
+      canvas.height = image.height;
+
+      // Draw the image on the canvas
+      ctx.drawImage(image, 0, 0);
+
+      // Define watermark text and style
+      const watermarkText = "Watermark OK NAR SAR A BA  N JFWIFWGWI GWG";
+      ctx.font = "30px Arial";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+      ctx.textAlign = "center";
+      ctx.fillText(watermarkText, canvas.width / 2, canvas.height / 2);
+
+      // Convert the canvas to a data URL
+      const watermarkedImageURL = canvas.toDataURL("image/png");
+
+      // Update the data property to display the watermarked image
+      this.watermarkedImageURL = watermarkedImageURL;
+    },
+  },
+};
+</script>
+
+
+
+
+////////////////////////////////
+
+
+<template>
+  <div class="container">
+    <!-- <button @click="spin()">Click</button> -->
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Bet</th>
+          <th>Amount</th>
+          <th>NextTarget</th>
+          <th>Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="v in res"
+          :key="v.id"
+          :style="`background-color: ${v.color}`"
+        >
+          <td>{{ v.id }}</td>
+          <td>{{ v.bet }}</td>
+          <td>{{ v.amount }}</td>
+          <td>{{ v.nextTarget }}</td>
+          <td>{{ v.color }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      amount: 10000,
+      bet: 100,
+      nextTarget: 10000,
+      target: 1,
+      res: [],
+    };
+  },
+  mounted() {
+    this.spin();
+  },
+  methods: {
+    spin() {
+      for (let i = 0; i < 400; i++) {
+        // console.log(this.amount);
+        if (this.amount > 1000) {
+          // setTimeout(() => {
+          this.recalculateBet();
+
+          let sR = this.spinResult();
+
+          if (sR == "red") {
+            this.amount += this.bet;
+
+            this.resetBetAmount();
+
+            this.changeTarget();
+          } else {
+            this.amount -= this.bet;
+
+            this.bet += 100;
+          }
+
+          this.res.unshift({
+            id: i + 1,
+            color: sR,
+            amount: this.amount,
+            bet: this.bet,
+            nextTarget: this.nextTarget,
+          });
+          // }, 100);
+        } else {
+          alert("You are broke");
+          break;
+        }
+      }
+    },
+    recalculateBet() { 
+        // if ((this.bet * 2) + this.amount >= this.nextTargett) {
+        //   let requireAmount = this.nextTarget - this.amount
+        //   console.log('requireAmount: ', requireAmount)
+        // }
+        if (this.bet <= 700 || this.bet >= 400) { 
+          let requireAmount = this.nextTarget - this.amount
+
+          let sum = 0;
+          let lastValue;
+
+          for (let i = 1; ; i++) {
+              sum += i * 100; // Assuming the increment is 100
+
+              if (sum > requireAmount) {
+                  lastValue = i * 100;
+                  break;
+              }
+          }
+
+          this.bet = lastValue
+          console.log('requireAmount: ', requireAmount)
+        } 
+    },  
+    spinResult() {
+      // Array of red numbers in a standard roulette
+      const redNumbers = [
+        1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36,
+      ];
+
+      // Generating a random number between 0 and 36 (inclusive)
+      const randomNumber = Math.floor(Math.random() * 37);
+
+      if (randomNumber === 0) {
+        return "green";
+      } else if (redNumbers.includes(randomNumber)) {
+        return "red";
+      } else {
+        return "black";
+      }
+    },
+    resetBetAmount() {
+      if (this.target == 3) {
+        this.bet = 100;
+      }
+      if (this.bet != 100) {
+        this.bet -= 100;
+      }
+      if (this.amount >= this.nextTarget) {
+        this.bet = 100
+      }
+    },
+    changeTarget() {
+      if (this.amount >= this.nextTarget) {
+        if (this.target == 1) {
+          this.nextTarget += 400;
+          this.target = 2;
+        } else if (this.target == 2) {
+          this.nextTarget += 300;
+          this.target = 3;
+        } else if (this.target == 3) {
+          this.nextTarget += 300;
+          this.target = 1;
+        }
+      }
+    },
+  },
+};
+</script>
+
+<style>
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+table {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+thead {
+  /* background-color: #f2f2f2; */
+}
+tbody {
+  /* background-color: #ffffff; */
+}
+</style>
