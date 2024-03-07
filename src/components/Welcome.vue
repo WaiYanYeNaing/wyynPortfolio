@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col h-screen py-28"
+    class="flex flex-col h-screen pt-10 sm:pt-14 md:py-28"
     style="background-position: -1px 1px"
   >
     <!-- Nav -->
@@ -12,117 +12,38 @@
       </div>
       <div class="w-20 h-20 flex justify-center items-center">Nav</div>
     </div> -->
-
-    <vue-particles id="tsparticles" :particlesLoaded="particlesLoaded" url="http://foo.bar/particles.json" />
-
-        <vue-particles
-            id="tsparticles"
-            :particlesLoaded="particlesLoaded"
-            :options="{
-                    background: {
-                        color: {
-                            value: '#0d47a1'
-                        }
-                    },
-                    fpsLimit: 120,
-                    interactivity: {
-                        events: {
-                            onClick: {
-                                enable: true,
-                                mode: 'push'
-                            },
-                            onHover: {
-                                enable: true,
-                                mode: 'repulse'
-                            },
-                        },
-                        modes: {
-                            bubble: {
-                                distance: 400,
-                                duration: 2,
-                                opacity: 0.8,
-                                size: 40
-                            },
-                            push: {
-                                quantity: 4
-                            },
-                            repulse: {
-                                distance: 200,
-                                duration: 0.4
-                            }
-                        }
-                    },
-                    particles: {
-                        color: {
-                            value: '#ffffff'
-                        },
-                        links: {
-                            color: '#ffffff',
-                            distance: 150,
-                            enable: true,
-                            opacity: 0.5,
-                            width: 1
-                        },
-                        move: {
-                            direction: 'none',
-                            enable: true,
-                            outModes: 'bounce',
-                            random: false,
-                            speed: 6,
-                            straight: false
-                        },
-                        number: {
-                            density: {
-                                enable: true,
-                            },
-                            value: 80
-                        },
-                        opacity: {
-                            value: 0.5
-                        },
-                        shape: {
-                            type: 'circle'
-                        },
-                        size: {
-                            value: { min: 1, max: 5 }
-                        }
-                    },
-                    detectRetina: true
-                }"
-        />
-
     <Nav />
 
-    <div class="flex flex-col justify-center items-center h-screen scale-75 lg:scale-100">
+    <div class="flex flex-col justify-center items-center h-screen mx-10 text-center">
       <div class="text-purple font-extrabold">
-        <span class="text-light-animation hey text-[2.7rem] mr-5"
+        <span class="text-light-animation hey text-[2rem] md:text-[2.7rem] sm:mr-5"
           >HEY, I'M
         </span>
-        <span class="text-light-animation name font-bold text-[3rem]"
+        <span class="text-light-animation name font-bold text-[2.2rem] md:text-[3rem]"
           >HOLA MOLA</span
         >
       </div>
-      <span class="text-purple text-3xl font-extrabold call-me"
+      <span class="text-light-animation text-purple text-sm sm:text-[1.4rem] md:text-3xl font-extrabold call-me"
         >BUT_YOU_CAN_CALL_ME_HELLO</span
-      >
+      > 
 
-      <span class="text-white text-base mt-3">
+      <span class="text-white text-xs sm:text-sm lg:text-base mt-3">
         In the world of browsers and buttons,
       </span>
-      <span class="text-white text-base"> I am the creator.</span>
+      <span class="text-white text-xs sm:text-sm lg:text-base"> I am the creator.</span>
 
-      <div class="flex space-x-10 mt-5 text-lg">
-        <div class="flex items-center">
-          <img src="@/assets/right_arrow.png" alt="arrow" class="w-6 mr-1" />
+      <div class="flex flex-col sm:flex-row sm:space-x-10 mt-5 text-lg">
+        <div class="flex items-center mt-3">
+          <img src="@/assets/right_arrow.png" alt="arrow" class="w-4 sm:w-6 mr-1" />
           <span
-            class="text-white hover-underline-animation"
+            class="text-white text-sm md:text-base hover-underline-animation"
             @click="goToProjects()"
             >see my projects</span
           >
         </div>
-        <div class="flex items-center">
-          <img src="@/assets/right_arrow.png" alt="arrow" class="w-6 mr-1" />
-          <span class="text-white hover-underline-animation"
+        <div class="flex items-center mt-3">
+          <img src="@/assets/right_arrow.png" alt="arrow" class="w-4 sm:w-6 mr-1" />
+          <span class="text-white text-sm md:text-base hover-underline-animation"
             @click="goToAbout()"
             >more about me</span
           >
@@ -143,9 +64,6 @@ const goToProjects = () => {
 };
 const goToAbout = () => {
   router.push("/About");
-};
-const particlesLoaded = async container => {
-    console.log("Particles container loaded", container);
 };
 </script>
 

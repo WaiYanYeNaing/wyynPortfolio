@@ -1,6 +1,6 @@
 <template> 
     <!-- Nav -->
-    <div class="flex justify-between px-20">
+    <div class="flex justify-between px-8 sm:px-20 sticky top-0 z-50">
       <div
         class="w-20 h-20 flex justify-center items-center transition-transform duration-500 ease-in-out hover:transform hover:rotate-90 cursor-pointer" @click="goToHome()"
       >

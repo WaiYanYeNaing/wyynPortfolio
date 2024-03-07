@@ -1,37 +1,35 @@
 <template>
-  <div class="flex flex-col h-screen py-28">
+  <div class="flex flex-col h-screen pt-10 sm:pt-14 md:py-28">
     <Nav />
-    <div class="flex">
-      <div class="flex flex-col w-9/12 pl-[15%] pr-[5%] pt-24 space-y-5">
+    <div class="flex flex-col md:flex-row">
+      <div class="flex flex-col order-2 md:order-1 w-full md:w-[55%] lg:w-[75%] pl-[5%] sm:pl-[5%] ml:pl-[10%] lg:pl-[15%] pr-[5%] pt-24 space-y-5 mb-20 md:mb-0">
         <h1 class="text-4xl font-bold text-white">ABOUT</h1>
         <div class="h-[2px] bg-white"></div>
-        <div class="leading-6">
-          Hey, my name is Charles Bruyerre and I use Sharlee as my nickname
-          across social medias. I’m a graphic designer, UX/UI designer &
-          front-end web developer from France. I’m also passionate about pop
-          music and make portraits and universes around what I listen to and I’m
-          always curious to learn more when it comes to new technologies and
-          creative coding.
+        <div class="leading-5 lg:leading-6 text-sm lg:text-base">
+          Hey there, I'm Wai Yan Ye Naing, known as Y. I'm a multi-faceted creative with a strong focus on web development.
+          With 4.5 years of experience, I specialize in Vue.js, React, and .NET Core, crafting seamless, user-centric web applications.
+          I'm always on the lookout for new challenges and opportunities to expand my skills in creative coding and emerging technologies. Let's collaborate and bring your ideas to life!
         </div>
         
         <div class="flex items-center pt-8">
-          <img src="@/assets/images/arrow_down.png" alt="arrow" class="w-5 h-5 mr-1" />
-          <span class="text-white w-fit hover-underline-animation"
+          <img src="@/assets/images/arrow_down.png" alt="arrow" class="w-4 lg:w-5 h-4 lg:h-5 mr-1" />
+          <span class="text-white w-fit hover-underline-animation text-sm lg:text-base"
             @click="downloadResume"
             >resume</span
           >
         </div>
       </div>
-
-      <!-- I want to rotate this infinitely -->
-      <div class="absolute w-[25%] right-[4.6rem] top-[3rem] z-50"> 
-        <img src="@/assets/images/now_playing.png" class="w-44 h-44 object-cover rounded-full rotate"> 
+ 
+      <div class="absolute hidden md:flex right-[35%] lg:right-[20%]  top-[3rem]">
+        <div class="relative top-1 z-30"> 
+          <img src="@/assets/images/now_playing.png" class="w-44 h-44 object-cover rounded-full rotate"> 
+        </div>
+        <div class="absolute right-[31px] top-[36px] z-30">  
+          <img src="https://images.hdqwalls.com/download/shapes-abstract-4k-dk-500x500.jpg" class="w-28 h-28 object-cover rounded-full">
+        </div>
       </div>
-      <div class="absolute w-[25%] right-10 top-20 z-50">  
-        <img src="https://images.hdqwalls.com/download/shapes-abstract-4k-dk-500x500.jpg" class="w-28 h-28 object-cover rounded-full">
-      </div>
 
-      <div class="flex flex-col w-[25%] bg-red-300 absolute right-0 top-0 aspect-[4/6.5] h-auto rounded-bl-[3.5rem] overflow-hidden">
+      <div class="flex flex-col order-1 md:order-2 mx-auto w-[80%] md:w-[45%] lg:w-[25%] bg-red-300 md:absolute right-0 top-0 aspect-[4/5.5] lg:aspect-[4/6.5] h-auto rounded-[1.5rem] md:rounded-t-none md:rounded-br-none md:rounded-bl-[3.54rem] overflow-hidden">
         <img src="@/assets/images/about.jpg" class="h-full object-cover" />
       </div>
 
@@ -73,19 +71,19 @@ const downloadResume = async () => {
 // }
  
 onMounted(() => {
-  audio.volume = 0.5
-  audio.play();
-  audio.addEventListener('ended', () => {
-    isPlaying.value = false;
-  });
+  // audio.volume = 0.3
+  // audio.play();
+  // audio.addEventListener('ended', () => {
+  //   isPlaying.value = false;
+  // });
 });
 
 onUnmounted(() => {
-  audio.pause();
-  audio.currentTime = 0;
-  audio.removeEventListener('ended', () => {
-    isPlaying.value = false;
-  });
+  // audio.pause();
+  // audio.currentTime = 0;
+  // audio.removeEventListener('ended', () => {
+  //   isPlaying.value = false;
+  // });
 })
 </script>
 

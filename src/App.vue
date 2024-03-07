@@ -29,8 +29,8 @@ router.afterEach(() => {
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>  -->
-  <!-- <CircleCursor />
-  <div class="noise"></div> -->
+  <CircleCursor />
+  <div class="noise"></div>
   <div v-if="isLoading" class="loading_top_bar"></div>
   <!-- <RouterView /> -->
   <RouterView v-slot="{ Component }">
