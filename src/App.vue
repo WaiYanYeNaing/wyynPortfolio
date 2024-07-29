@@ -2,19 +2,29 @@
 import { RouterLink, RouterView, useRouter } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
 import CircleCursor from "./components/utility/CircleCursor.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const router = useRouter();
 const isLoading = ref(false);
 
+const isLoaded = ref(false);
+
+onMounted(() => {
+  setTimeout(() => {
+    isLoaded.value = true
+  }, 1000);
+})
+
 router.beforeEach((to, from, next) => { 
   isLoading.value = true;
+  isLoaded.value = false;
   next();
 });
 
 router.afterEach(() => { 
   setTimeout(() => {
     isLoading.value = false;
+    isLoaded.value = true;
   }, 600);
 });
 </script>
@@ -35,12 +45,27 @@ router.afterEach(() => {
   <!-- <RouterView /> -->
   <RouterView v-slot="{ Component }">
     <!-- <transition name="slide" mode="in-out"> -->
-      <component :is="Component" />
+    <Transition name="slide-fade">
+      <component :is="Component" v-if="isLoaded" />
+    </Transition>
     <!-- </transition> -->
   </RouterView>
 </template>
 
 <style scoped>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(120px);
+  opacity: 0;
+}
 /* .slide-enter-active {
   transition: all 0.4s ease;
 }

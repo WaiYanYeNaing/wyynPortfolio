@@ -6,8 +6,8 @@
         <h1 class="text-4xl font-bold text-white">ABOUT</h1>
         <div class="h-[2px] bg-white"></div>
         <div class="leading-5 lg:leading-6 text-sm lg:text-base">
-          Hey there, I'm Wai Yan Ye Naing, known as Y. I'm a multi-faceted creative with a strong focus on web development.
-          With 4.5 years of experience, I specialize in Vue.js, React, and .NET Core, crafting seamless, user-centric web applications.
+          Hey there, I'm Wai Yan Ye Naing, known as Wai. I'm a multi-faceted creative with a strong focus on web development.
+          With 4.8 years of experience, I specialize in Vue.js, React, and .NET Core, crafting seamless, user-centric web applications.
           I'm always on the lookout for new challenges and opportunities to expand my skills in creative coding and emerging technologies. Let's collaborate and bring your ideas to life!
         </div>
         
@@ -50,7 +50,7 @@ const audio = new Audio(audioFile);
 const isPlaying = ref(false);
 
 const downloadResume = async () => {
-  const fileID = '1aCYmTMF6Yy_AhQK3T4RMWKmqIw7y0kFz'; // Replace with your file ID
+  const fileID = '1lNeHuzrAlhS1BeImpuByYdYFRIHPwrn_'; // Replace with your file ID
   const url = `https://drive.google.com/uc?export=download&id=${fileID}`;
   const link = document.createElement('a');
   link.href = url;

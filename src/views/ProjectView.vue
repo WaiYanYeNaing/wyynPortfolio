@@ -1,31 +1,31 @@
 <template>
-  <div class="flex flex-col h-screen py-28">
+  <div class="flex flex-col h-screen py-10 lg:py-28">
     <Nav />
-    <div class="flex justify-between mt-20">
-      <div class="min-w-[450px] w-3/6 relative">
+    <div class="flex text-[#f3f2f9ba] justify-between mt-10 lg:mt-20">
+      <div class="hidden md:flex w-1/2 relative">
         <transition name="fade" mode="out-in">
-          <img :key="hoveredProjectImage" :src="hoveredProjectImage" class="rounded-r-[3rem] absolute bottom-0 left-0" alt="project">
+          <img :key="hoveredProjectImage" :src="computedImageUrl" class="rounded-tr-[3rem] absolute bottom-[-12px] left-0 h-[400px] object-cover" alt="project">
         </transition>
       </div>
 
-      <div class="min-w-[450px] mr-36">
+      <div class="w-full md:w-1/2 pl-10 lg:pl-20 mr-16 lg:mr-20 xl:mr-48">
         <div class="flex justify-between items-center pb-5">
-          <div class="font-extrabold text-[3rem]">Projects</div>
+          <div class="font-extrabold text-2xl sm:text-[3rem]">Projects</div>
           <div class="font-semibold text-xl">9</div>
         </div>
-        <div class="h-[21rem] overflow-y-auto">
+        <div ref="scrollableDiv" class="h-[21rem] overflow-y-auto" @click="goToProjectDetail()">
           <div v-for="(project, i) in projects" :key="i" class="project" @mouseover="hoveredProjectImage = project.image">
             <hr />
-            <div class="flex justify-between py-5">
-              <div class="flex flex-row items-center space-x-3">
+            <div class="flex justify-between items-center py-5">
+              <div class="flex flex-row w-2/3 items-center md:space-x-3">
                 <img
                   src="@/assets/right_arrow_pj.png"
                   class="arrow-image"
                   alt="right arrow"
                 />
-                <div>{{ project.projectName }}</div>
+                <div class="text-sm md:text-base">{{ project.projectName }}</div>
               </div>
-              <div>{{ project.type }}</div>
+              <div class="text-sm w-1/3 text-right font-[PoiretOne] font-bold tracking-wide text-ellipsis overflow-hidden whitespace-nowrap">{{ project.type }}</div>
             </div>
           </div>
         </div>
@@ -35,14 +35,20 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import Nav from "../components/utility/Nav.vue";
+import { useRouter } from "vue-router";
+import useSmoothScroll from "../components/utility/SmoothScroll.js";
+
+const { scrollableDiv } = useSmoothScroll();
+
+const router = useRouter();
 
 const projects = ref([
-  { projectName: "sharlee", type: "Branding", image: "https://images.hdqwalls.com/download/the-dreamy-colorful-landscape-5k-9y-800x400.jpg" },
-  { projectName: "pixelverse", type: "Design Studio", image: "https://images.hdqwalls.com/download/landscape-dreamy-moon-minimalist-4k-qj-800x400.jpg" },
-  { projectName: "foodieFinds", type: "Food Blog", image: "https://images.hdqwalls.com/download/free-fallen-yp-800x400.jpg" },
-  { projectName: "wanderlustX", type: "Travel Platform", image: "https://images.hdqwalls.com/download/anime-girl-pier-side-fy-800x400.jpg" },
+  { projectName: "dhipaya", type: "Insurance", image: "Screenshot_1.png" },
+  { projectName: "optimistic", type: "HR Management", image: "Screenshot_2.png" },
+  { projectName: "Jarviz", type: "Company Management", image: "Screenshot_3.png" },
+  { projectName: "Veracity", type: "Digital Signature", image: "Screenshot_4.png" },
   { projectName: "ecoEssentials", type: "Sustainable Products", image: "https://images.hdqwalls.com/download/ultra-instinct-scorpion-8k-n3-800x400.jpg" },
   { projectName: "techNest", type: "Tech News", image: "https://images.hdqwalls.com/download/triangles-neon-colors-8k-jx-800x400.jpg" },
   { projectName: "fitFlex", type: "Fitness App", image: "https://images.hdqwalls.com/download/low-poly-red-triangle-art-abstract-0y-800x400.jpg" },
@@ -51,6 +57,19 @@ const projects = ref([
 ]);
 const hoveredProjectImage = ref("https://images.hdqwalls.com/download/the-dreamy-colorful-landscape-5k-9y-800x400.jpg");
 
+const goToProjectDetail = () => {
+  router.push('/ProjectDetail')
+}
+
+const computedImageUrl = computed(() => {
+  // Check if the hovered image is a URL or a local file
+  if (hoveredProjectImage.value.startsWith("http")) {
+    return hoveredProjectImage.value;
+  } else {
+    // Assume it's a local file
+    return new URL(`../assets/images/${hoveredProjectImage.value}`, import.meta.url).href;
+  }
+});
 </script>
 
 <style scoped>

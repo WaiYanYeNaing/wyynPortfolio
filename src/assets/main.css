@@ -12,9 +12,16 @@
   font-family: "BrunoAce";
   src: url(fonts/BrunoAce-Regular.ttf);
 }
+@font-face {
+  font-family: "PoiretOne";
+  src: url(fonts/PoiretOne-Regular.ttf);
+}
 
 body{
   font-family: 'BrunoAce';
+}
+#app{
+  overflow-y: hidden;
 }
 
 /* #app {

@@ -7,7 +7,8 @@ export default {
         gray: "#303039",
         white: "#ECEAF2",
         purple: "#9AA1BC",
-      }, 
+        accent: "#5bedc7",
+      },
       // keyframes: {
       //   pulse: {
       //     '0%, 100%': { opacity: 0.5 },

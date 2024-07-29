@@ -20,11 +20,11 @@
           >HEY, I'M
         </span>
         <span class="text-light-animation name font-bold text-[2.2rem] md:text-[3rem]"
-          >HOLA MOLA</span
+          >WAI YAN YE NAING</span
         >
       </div>
       <span class="text-light-animation text-purple text-sm sm:text-[1.4rem] md:text-3xl font-extrabold call-me"
-        >BUT_YOU_CAN_CALL_ME_HELLO</span
+        >BUT_YOU_CAN_CALL_ME_WAI</span
       > 
 
       <span class="text-white text-xs sm:text-sm lg:text-base mt-3">
@@ -88,7 +88,7 @@ const goToAbout = () => {
   position: relative;
 }
 .call-me:before {
-  content: "BUT_YOU_CAN_CALL_ME_HELLO";
+  content: "BUT_YOU_CAN_CALL_ME_WAI";
   position: absolute;
   color: #fff;
   top: 0;
